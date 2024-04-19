@@ -5,8 +5,8 @@ from matplotlib.animation import FuncAnimation
 # 가상의 데이터 생성
 np.random.seed(42)    
 
-X = 2 * np.random.rand(100, 1)           
-y = 4 + 3 * X + np.random.randn(100, 1) 
+X = 2 * np.random.rand(100, 1)
+y = 4 + 3 * X + np.random.randn(100, 1)
 
 
 X_b = np.c_[np.ones((100, 1)), X]

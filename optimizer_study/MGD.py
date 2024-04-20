@@ -9,7 +9,7 @@ y = 4 + 3 * X + np.random.randn(100, 1)
 X_b = np.c_[np.ones((100, 1)), X]
 
 # 초기값 설정
-eta = 0.1  # 학습률
+lr = 0.1  # 학습률
 n_iterations = 1000  # 반복 횟수
 m = 100  # 샘플 개수
 batch_size = 10  # 미니 배치 크기
@@ -26,17 +26,7 @@ for iteration in range(n_iterations):
         xi = X_b_shuffled[i:i+batch_size]
         yi = y_shuffled[i:i+batch_size]
         gradients = 2/batch_size * xi.T.dot(xi.dot(theta_mgd) - yi)
-        theta_mgd = theta_mgd - eta * gradients
+        theta_mgd = theta_mgd - lr * gradients
         theta_mgd_path.append(theta_mgd)
 
 theta_mgd_path = np.array(theta_mgd_path)
-
-# 결과 시각화
-plt.figure(figsize=(8, 6))
-plt.plot(theta_mgd_path[:, 0], theta_mgd_path[:, 1], "b-o", linewidth=1, label="MGD")
-plt.xlabel(r"$\theta_0$")
-plt.ylabel(r"$\theta_1$")
-plt.title("Mini-batch Gradient Descent")
-plt.legend()
-plt.grid(True)
-plt.show()

@@ -2,6 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # 가상의 데이터 생성
+np.random.seed(42)    
+
 X = 2 * np.random.rand(100, 1) # 0과 2사이의 수 100개 생성(독립변수)
 y = 4 + 3 * X + np.random.randn(100, 1) # 4+3*X에 노이즈가 추가된 y생성
 

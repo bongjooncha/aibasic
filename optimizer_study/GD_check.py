@@ -1,19 +1,18 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
+import pandas as pd
 
 # 공통 값
-np.random.seed(42)
+np.random.seed(0)
 X = 2 * np.random.rand(100, 1)
 y = 4 + 3 * X + np.random.randn(100, 1)
 X_b = np.c_[np.ones((100, 1)), X]
 
 # 설정 값
-lr = 0.1  # 학습률
-n_epochs = 500  # 반복 횟수
+lr = 0.12  # 학습률
+n_epochs = 5000  # 반복 횟수
 m = 100  # 샘플 개수
-#batch_size는 미니배치에서만 사용
-batch_size = 100  # 미니 배치 크기
 
 #초기 theta 값
 start = np.random.randn(2, 1)  # 무작위 초기화
@@ -51,6 +50,8 @@ for epoch in range(n_epochs):
 theta_sgd_path = np.array(theta_sgd_path)
 
 # MGD 구현
+batch_size = 100  # 미니 배치 크기
+
 theta_mgd = start 
 theta_mgd_path = []
 
@@ -63,9 +64,11 @@ for iteration in range(n_epochs):
         yi = y_shuffled[i:i+batch_size]
         gradients = 2/batch_size * xi.T.dot(xi.dot(theta_mgd) - yi)
         theta_mgd = theta_mgd - lr * gradients
-        theta_mgd_path.append(theta_mgd)
+    theta_mgd_path.append(theta_mgd)
 
 theta_mgd_path = np.array(theta_mgd_path)
+print(len(theta_mgd_path))
+print(theta_mgd)
 
 # 애니메이션 설정
 fig, ax = plt.subplots(figsize=(10, 8))
@@ -97,7 +100,6 @@ fig, ax = plt.subplots(figsize=(10, 8))
 # plt.show()
 
 # theta animation
-
 def animate(i):
     plt.clf()
     plt.plot(theta_bgd_path[:i+1, 0], theta_bgd_path[:i+1, 1], 'r-', label="BGD")
@@ -116,5 +118,25 @@ def animate(i):
     plt.grid(True)
 
 ani = FuncAnimation(fig, animate, frames=len(theta_bgd_path), interval=50)
+# ani.save('./gradient_descent_theta_animation.gif', writer='imagemagick')
 
 plt.show()
+
+# theta_bgd_2d = np.squeeze(theta_bgd_path, axis=2)
+# theta_sgd_2d = np.squeeze(theta_sgd_path, axis=2)
+# theta_mgd_2d = np.squeeze(theta_mgd_path, axis=2)
+
+# # theta_bgd_2d, theta_sgd_2d, theta_mgd_2d를 데이터프레임으로 변환
+# df_bgd = pd.DataFrame(theta_bgd_2d, columns=['Theta0', 'Theta1'])
+# df_sgd = pd.DataFrame(theta_sgd_2d, columns=['Theta0', 'Theta1'])
+# df_mgd = pd.DataFrame(theta_mgd_2d, columns=['Theta0', 'Theta1'])
+
+# # 데이터프레임 출력
+# print("Batch Gradient Descent:")
+# print(df_bgd.head())
+
+# print("\nStochastic Gradient Descent:")
+# print(df_sgd.head())
+
+# print("\nMini-batch Gradient Descent:")
+# print(df_mgd.head())

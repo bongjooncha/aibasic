@@ -10,7 +10,7 @@ X_b = np.c_[np.ones((100, 1)), X]
 
 # 초기값 설정
 lr = 0.1  # 학습률
-n_iterations = 1000  # 반복 횟수
+n_iterations = 100  # 반복 횟수
 m = 100  # 샘플 개수
 batch_size = 10  # 미니 배치 크기
 

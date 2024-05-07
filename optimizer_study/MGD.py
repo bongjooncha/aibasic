@@ -27,6 +27,6 @@ for iteration in range(n_iterations):
         yi = y_shuffled[i:i+batch_size]
         gradients = 2/batch_size * xi.T.dot(xi.dot(theta_mgd) - yi)
         theta_mgd = theta_mgd - lr * gradients
-        theta_mgd_path.append(theta_mgd)
+    theta_mgd_path.append(theta_mgd)
 
 theta_mgd_path = np.array(theta_mgd_path)

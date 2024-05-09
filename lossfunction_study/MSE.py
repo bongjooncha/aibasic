@@ -10,3 +10,4 @@ import torch.nn.functional as F
 
 def mean_squared_error_t(y_true, y_pred):
     return F.mse_loss(y_pred, y_true)
+

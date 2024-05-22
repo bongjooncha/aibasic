@@ -69,52 +69,52 @@ theta_mgd_path = np.array(theta_mgd_path)
 # 애니메이션 설정
 fig, ax = plt.subplots(figsize=(10, 8))
 
-# # 함수 animation
-# def animate(i):
-#     plt.clf()
-#     plt.plot(X, y, 'b.')  # 데이터 플롯
-
-#     # Batch Gradient Descent (BGD)
-#     plt.plot(X, X_b.dot(theta_bgd_path[i]), 'r-', label="BGD")
-
-#     # Stochastic Gradient Descent (SGD)
-#     plt.plot(X, X_b.dot(theta_sgd_path[i]), 'g-', label="SGD")
-
-#     # Mini-batch Gradient Descent (MGD)
-#     plt.plot(X, X_b.dot(theta_mgd_path[i]), 'b-', label="MGD")
-
-#     plt.title(f"Iteration: {i}")
-#     plt.xlabel('X')
-#     plt.ylabel('y')
-#     plt.legend()
-#     plt.grid(True)
-
-# ani = FuncAnimation(fig, animate, frames=len(theta_bgd_path), interval=50)
-# ani.save('./gradient_descent_animation.gif', writer='imagemagick')
-
-
-
-# theta animation
+# 함수 animation
 def animate(i):
     plt.clf()
-    plt.plot(theta_bgd_path[:i+1, 0], theta_bgd_path[:i+1, 1], 'r-', label="BGD")
-    plt.scatter(theta_bgd_path[i, 0], theta_bgd_path[i, 1], color='red', s=10, marker='o')
+    plt.plot(X, y, 'b.')  # 데이터 플롯
 
-    plt.plot(theta_sgd_path[:i+1, 0], theta_sgd_path[:i+1, 1], 'g-', label="SGD")
-    plt.scatter(theta_sgd_path[i, 0], theta_sgd_path[i, 1], color='green', s=10, marker='o')
+    # Batch Gradient Descent (BGD)
+    plt.plot(X, X_b.dot(theta_bgd_path[i]), 'r-', label="BGD")
 
-    plt.plot(theta_mgd_path[:i+1, 0], theta_mgd_path[:i+1, 1], 'b-', label="MGD")
-    plt.scatter(theta_mgd_path[i, 0], theta_mgd_path[i, 1], color='blue', s=10, marker='o')
+    # Stochastic Gradient Descent (SGD)
+    plt.plot(X, X_b.dot(theta_sgd_path[i]), 'g-', label="SGD")
 
+    # Mini-batch Gradient Descent (MGD)
+    plt.plot(X, X_b.dot(theta_mgd_path[i]), 'b-', label="MGD")
 
     plt.title(f"Iteration: {i}")
-    plt.xlabel('Theta_0')
-    plt.ylabel('Theta_1')
+    plt.xlabel('X')
+    plt.ylabel('y')
     plt.legend()
     plt.grid(True)
 
 ani = FuncAnimation(fig, animate, frames=len(theta_bgd_path), interval=50)
-ani.save('./gradient_descent_theta_animation.gif', writer='imagemagick')
+ani.save('./gradient_descent_animation.gif', writer='imagemagick')
+
+
+
+# # theta animation
+# def animate(i):
+#     plt.clf()
+#     plt.plot(theta_bgd_path[:i+1, 0], theta_bgd_path[:i+1, 1], 'r-', label="BGD")
+#     plt.scatter(theta_bgd_path[i, 0], theta_bgd_path[i, 1], color='red', s=10, marker='o')
+
+#     plt.plot(theta_sgd_path[:i+1, 0], theta_sgd_path[:i+1, 1], 'g-', label="SGD")
+#     plt.scatter(theta_sgd_path[i, 0], theta_sgd_path[i, 1], color='green', s=10, marker='o')
+
+#     plt.plot(theta_mgd_path[:i+1, 0], theta_mgd_path[:i+1, 1], 'b-', label="MGD")
+#     plt.scatter(theta_mgd_path[i, 0], theta_mgd_path[i, 1], color='blue', s=10, marker='o')
+
+
+#     plt.title(f"Iteration: {i}")
+#     plt.xlabel('Theta_0')
+#     plt.ylabel('Theta_1')
+#     plt.legend()
+#     plt.grid(True)
+
+# ani = FuncAnimation(fig, animate, frames=len(theta_bgd_path), interval=50)
+# ani.save('./gradient_descent_theta_animation.gif', writer='imagemagick')
 
 plt.show()
 

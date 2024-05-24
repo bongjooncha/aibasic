@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 
 # 가상의 데이터 생성
-np.random.seed(42)
+np.random.seed(42)  # 다른 GD와 비교하기 위해서 seed 정의
 
 X = 2 * np.random.rand(100, 1)  # 0과 2사이의 수 100개 생성(독립변수)
 y = 4 + 3 * X + np.random.randn(100, 1)  # 4+3*X에 노이즈가 추가된 y생성(종속변수)
@@ -23,12 +23,12 @@ theta_adagrad_path = []                # 앞으로 생성될 세타 쌍을 저�
 
 # AdaGrad 변수 초기화
 epsilon = 1e-8  # 분모가 0이 되는 것을 방지하기 위한 작은 값
-gradient_sums = np.zeros((2, 1))  # 그라디언트의 제곱합을 저장
+G = np.zeros((2, 1))  # 그라디언트의 제곱합을 저장
 
 for iteration in range(n_iterations):  # 1회 반복 당 시행되는 과정
     gradients = 2/m * X_b.T.dot(X_b.dot(theta_adagrad) - y)
-    gradient_sums += gradients**2
-    adjusted_eta = eta / (np.sqrt(gradient_sums) + epsilon)
+    G += gradients**2
+    adjusted_eta = eta / (np.sqrt(G) + epsilon)
     theta_adagrad -= adjusted_eta * gradients
     theta_adagrad_path.append(theta_adagrad.copy())
 

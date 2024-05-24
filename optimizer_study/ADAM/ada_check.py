@@ -115,7 +115,7 @@ theta_adam_path = np.array(theta_adam_path)
 fig, ax = plt.subplots(figsize=(10, 8))
 
 # 함수 animation
-def animate(i):/
+def animate(i):
     plt.clf()
     plt.plot(X, y, 'k.')  # 데이터 플롯
 
@@ -142,7 +142,7 @@ def animate(i):/
     plt.grid(True)
 
 ani = FuncAnimation(fig, animate, frames=len(theta_bgd_path), interval=50)
-ani.save('./gradient_descent_animation.gif', writer='Pillow')
+ani.save('./ada_animation.gif', writer='Pillow')
 
 
 
